@@ -1,0 +1,83 @@
+Class<?> forName(String name, boolean initialize,ClassLoader loader) 静态方法，获取指定类的Class实例，可以指定类加载器
+getSuperclass 获取父类
+Type getGenericSuperclass()  ？？区别是什么？？
+getInterfaces 获取所有继承的接口
+Type[] getGenericInterfaces()   ？？区别？？
+Class<?> getComponentType(); 只对数组有用，返回数组类型里面的元素类型
+ 
+
+getSimpleName 简单类名
+getName 全名如java.lang.String
+getTypeName 如果是类则与getName一样，如果是数组，则返回元素的名称
+getSimpleBinaryName 不知道干嘛的
+
+int getModifiers(); 获取类的标记，class文件规范
+
+
+
+
+boolean isInstance(Object obj);判断obj类型是不是当前Class的子类
+
+T newInstance() 创建实例
+
+boolean isAssignableFrom(Class<?> cls); 如果cls是当前Class类型的子类（包括接口），那么返回true
+
+
+类层级关系
+a) Top level classes
+b) Nested classes (static member classes)
+c) Inner classes (non-static member classes)
+d) Local classes (named classes declared within a method)
+e) Anonymous classes
+getEnclosingClass 获取包装当前类的直接外部类
+Method getEnclosingMethod() 如果是匿名类或者局部类，则返回包含其定义域的方法。
+Constructor<?> getEnclosingConstructor() 与getEnclosingMethod类似，只不过是在构造函数内定义类
+Class<?> getDeclaringClass() 如果是内部类等，获取到包装其的外部类
+Class<?>[] getClasses() 获取当前类包含的所有public内部类
+
+getClassLoader 获取类加载器
+getPackage 获取包元数据
+Object[] getSigners(); 获取类的签名，很少用
+
+Field[] getFields() 获取所有public字段
+Field getField(String name)获取指定public字段，会递归到父类去找
+Field[] getDeclaredFields() 获取所有字段
+ Field getDeclaredField(String name) 获取指定字段，包括私有
+Method[] getMethods()  获取所有public方法
+Method getMethod(String name, Class<?>... parameterTypes) 获取指定public方法
+Method[] getDeclaredMethods()  获取所有方法
+Method getDeclaredMethod(String name, Class<?>... parameterTypes)包括私有
+Constructor<?>[] getConstructors() 
+Constructor<T> getConstructor(Class<?>... parameterTypes)
+Constructor<?>[] getDeclaredConstructors() 获取所有构造函数
+Constructor<T> getDeclaredConstructor(Class<?>... parameterTypes) 包括私有
+Class<?>[] getDeclaredClasses()  获取所有内部类
+
+
+TypeVariable<Class<T>>[] getTypeParameters() 获取当前类声明的泛型标记，如class A<T,S>，那么返回T、S两个
+
+
+isInterface 是否接口
+isArray 是否数组
+isPrimitive 是否原始类型，比如int.class.isPrimitive()调用这个方法为true
+isAnnotation 是否注解类型
+isSynthetic 是否是自动生成的类，非代码写出来的
+isAnonymousClass 是否匿名类，匿名类的名称为空
+isLocalClass是否是本地类，也就是在方法内定义的
+isLocalOrAnonymousClass 是否在方法内部定义的类
+isEnum
+
+
+this.getClass().getClassLoader().getResource("") 类加载的跟路径
+getResourceAsStream 如果是空字符串、"."、相对路径"./xxxx"那么就是相对于当前类所在路径，如果使用绝对路径"/"开头，那么就是指类加载器路径，同this.getClass().getClassLoader().getResource("")
+getResource
+
+Annotation[] getAnnotations() 获取所有注解，包括父类
+<A extends Annotation> A getAnnotation(Class<A> annotationClass) 获取指定注解
+boolean isAnnotationPresent(Class<? extends Annotation> annotationClass) 指定的注解是否存在
+<A extends Annotation> A[] getAnnotationsByType(Class<A> annotationClass) 获取指定注解
+Annotation[] getDeclaredAnnotations() 只有本类声明的
+<A extends Annotation> A getDeclaredAnnotation(Class<A> annotationClass) 
+<A extends Annotation> A[] getDeclaredAnnotationsByType(Class<A> annotationClass)
+AnnotatedType getAnnotatedSuperclass() 获取带注解的父类
+AnnotatedType[] getAnnotatedInterfaces()

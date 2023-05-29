@@ -1,37 +1,12 @@
-Type：
-（1）如果类型是不带参数化类型的，那么就和原来的Class、数组（也是Class）、基本类型（也是Class）
-一般要确定某个具体类型时，需要层层往下剥，最后的类型一定是不带参数化类型，中间的类型是ParameterizedType、GenericArrayType、WildcardType
-（2）如果有参数则有三种
-1、ParameterizedType: 表示一种参数化的类型，ParameterizedType内部包含了原始类型以及参数类型的Class，Method、Field可以获取到，然后借助ParameterizedType就可以知道具体的方法参数类型了。
-对于类来说，可以获取父类的ParameterizedType
-public class Person<T, E> {
-}
-
-public class Student extends Person<Student, Integer> {
-
-    public static void main(String[] args) {
-        Class clazz = Student.class;
-        //获取带泛型的类型
-        ParameterizedType superclass = (ParameterizedType) clazz.getGenericSuperclass();
-        Type[] arguments = superclass.getActualTypeArguments();
-        for (Type argument : arguments) {
-            System.out.println(argument);
-        }
-    }
-    
-}
-
-结果：
-Student
-Integer
-
-那怎么获取某个实例的具体参数是什么呢？
-ParameterizedType的方法包括
-Type[] getActualTypeArguments()	参数化类型中的TypeVariable参数类型，如List 返回 String.class, List<List<> 返回List<>
-Type getOwnerType()	获取当前Type所属的Type，比如对于O.I中的I类型，会返回O
-Type getRawType()	获取当前Type的Class，如List 返回 List.class
+字节码操作工具：
+javassist
+asm更底层
+《深入》里面还有一个线上动态变更的工具
 
 
-2、GenericArrayType: 表示一种元素类型是参数化类型或者类型变量的数组类型，如List[][]；
-层层递进
-3、WildcardType: 代表一种通配符类型表达式，比如List<?>, List<? extends ClassA>, List<? super Object>。
+热加载、热替换：
+必须自定义类加载器加载的，否则替换不了。而且每次加载一个类进来，就必须实例化一个新的类加载器，然后new 新对象出来，通过setter方法把新对象替换过去。
+
+
+线程如何影响引用链
+一些GC ROOT->Thread对象->线程对象下的变量->变量的Class对象->ClassLoader，这样线程在跑的时候，其使用的变量就不可能卸载，对应的类也不可能卸载。要动态切换的话，需要解决的问题非常多。

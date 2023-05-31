@@ -1,12 +1,67 @@
 当类没有任何地方引用的时候，包括类加载器自身也被回收的时候，类就被卸载了。
-
 编译器优化的时候，有可能超出作用域的对象，其本地变量表会被重复利用，从而协助gc收集器回收。显式赋值null不优雅。
-
-
 问题及记录
 1、先向os申请内存，然后把内存分为几个区域
 2、静态成员存在哪？String和其他对象在方法区吗？还是有一部分放到了堆?
 3、jvm把本地方法和java方法的栈合二为一了
 4、jvm的方法栈，从哪申请的（同时要注意，栈区的空间 JVM 没有办法去限制的，因为 JVM 在运行过程中会有线程不断的运行，没办法限制，所以只限制单个虚拟机栈的大小。）
 5、内存溢出的四种：栈、堆、方法（java8已经移动到堆）、直接内存
-6、
+
+Klass 系对象，用于描述类型的总体信息【通过 OOP 信息（inspect）可以看到 instanceKlass 对象】
+
+ConstantPool/ConstantPoolCache 对象：每个 InstanceKlass 关联着一个 ConstantPool，作为该类型的运行时常量池。这个常量池的结构跟 Class 文件里的常量池基本上是对应的
+
+
+assert true | false
+attach pid | exec core  连接
+detach 断开
+reattach
+buildreplayjars [ all | app | boot ]  | [ prefix ]  不知道干啥的
+scanoops start end [ type ] 在堆栈中检索某个类型的对象
+jhisto 对象直方图
+inspect expression 和图形化界面功能一样
+revptrs address 使用一个对象地址，反向找对象被谁引用
+thread { -a | id } 显示线程的基本信息，
+threads
+universe 堆栈汇总信息，与图形化功能heap parameter一样
+jdis address 地址是某个Method的地址，在图形化界面class brownser能找到
+disassemble address 和图形化功能code viewer一样
+history 历史命令
+help [ command ]
+quit退出
+
+
+  dis address [length]
+  dumpcfg { -a | id }
+  dumpcodecache
+  dumpideal { -a | id }
+  dumpilt { -a | id }
+  dumpreplaydata { <address > | -a | <thread_id> }
+  echo [ true | false ]
+  examine [ address/count ] | [ address,address]
+  field [ type [ name fieldtype isStatic offset address ] ]
+  findpc address
+  flags [ flag | -nd 
+  intConstant [ name [ value ] ]
+  jstack [-v]
+  livenmethods
+  longConstant [ name [ value ] ]
+  pmap
+  print expression  
+  printall  慎用，不要用打印内容太多
+  printas type expression
+  printmdo [ -a | expression ]
+  printstatics [ type ]
+  pstack [-v]
+  search [ heap | perm | rawheap | codecache | threads ] value
+  source filename
+  symbol address
+  symboldump
+  symboltable name
+  tokenize ...
+  type [ type [ name super isOop isInteger isUnsigned size ] ]
+  
+  verbose true | false
+  versioncheck [ true | false ]
+  vmstructsdump
+  where { -a | id }

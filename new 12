@@ -6,6 +6,18 @@
 3、jvm把本地方法和java方法的栈合二为一了
 4、jvm的方法栈，从哪申请的（同时要注意，栈区的空间 JVM 没有办法去限制的，因为 JVM 在运行过程中会有线程不断的运行，没办法限制，所以只限制单个虚拟机栈的大小。）
 5、内存溢出的四种：栈、堆、方法（java8已经移动到堆）、直接内存
+6、<<Reverse pointers>>: 表示被谁引用了
+7、whatis 0x0000000012c14840
+Address 0x0000000012c14840: In thread-local allocation buffer for thread "main" (4)  [0x0000000012c111b8,0x0000000012c14850,0x0000000012c1ea00,{0x0000000012c1ea18})
+:: 线程 TLAB 内分配的空间
+8、我们平时写的java类编译成.class文件，JVM加载.class文件，那么加载.class文件之后在JVM中就是oop-kclass（C++）模型形式存在的。
+9、hsdb看到的是jvm内部c++的状态
+10、HotSpot并不把instanceKlass暴露给Java，而会另外创建对应的instanceOopDesc来表示java.lang.Class对象，并将后者称为前者的“Java镜像”就是图中看到的'_java_mirror'属性。
+instanceOopDesc中的_metadata成员，它是联合体，可以表示未压缩的Klass指针(_klass)和压缩的Klass指针。对应的klass指针指向一个存储类的元数据的Klass对象
+11、hsdb既可以查看java对象、元数据之间的关系，又可以查看jvm内部c++结构、对象之间的关系。
+12、Hotspot没有把其内部核心的数据结构直接开放，而是使用了另外一个傀儡拷贝对外开放。
+12、class brownser里面的类、
+
 
 Klass 系对象，用于描述类型的总体信息【通过 OOP 信息（inspect）可以看到 instanceKlass 对象】
 

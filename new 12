@@ -46,20 +46,22 @@ StringTest对象：0x0000000011c0ddf8
    _metadata:InstanceKlass地址：0x0000000012a14750 jvm内部InstanceKlass对象
         _mirror: Oop for java/lang/Class @ 0x0000000011c09308  Class对象
 		    _metadata:0x0000000012614158  jvm内部InstanceMirrorKlass对象
-				_mirror:特殊的Class对象
+				_mirror: Oop for java/lang/Class @ 0x0000000011f1d468 Class对象
+					_metadata:0x0000000012614158  指回到了InstanceMirrorKlass对象	
 		    静态对象WeakReference对象地址：0x0000000011c0dc90
                _metadata:InstanceRefKlass地址：0x000000001262f230
                     _mirror:: Oop for java/lang/Class @ 0x0000000011f175d0 Class对象
                         _metadata:0x0000000012614158 jvm内部InstanceMirrorKlass对象
-            				_mirror:特殊的Class对象
+            				_mirror: Oop for java/lang/Class @ 0x0000000011f1d468 Class对象
+								_metadata:0x0000000012614158  指回到了InstanceMirrorKlass对象	
             静态String对象"stringtest.StringTestb" @ 0x0000000011c0d9e8		
                 _metadata:InstanceKlass地址：0x0000000012609010 jvm内部InstanceKlass对象
 				    _mirror: Oop for java/lang/Class @ 0x0000000011f1a598  Class对象 
                         _metadata:0x0000000012614158  jvm内部InstanceMirrorKlass对象	
-						    _mirror:特殊的Class对象
+						    _mirror: Oop for java/lang/Class @ 0x0000000011f1d468 Class对象
+								_metadata:0x0000000012614158  指回到了InstanceMirrorKlass对象	
 							
-							
-							
+						
 
 
 

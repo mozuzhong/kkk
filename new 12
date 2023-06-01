@@ -19,9 +19,23 @@ instanceOopDesc中的_metadata成员，它是联合体，可以表示未压缩�
 12、class brownser里面的类、
 
 
-Klass 系对象，用于描述类型的总体信息【通过 OOP 信息（inspect）可以看到 instanceKlass 对象】
+find pointer : 查找一个地址，看这个地址是在新生代、老年代
+classes、class 类全名，功能和class browser一样
+print 输入Klass*, Method*等地址，效果同Code Viewer菜单
+where 输入线程id，查看该线程的调用栈，输入-a，查看所有线程的调用栈，效果同show java stack trace
+printmdo 用于打印指定地址的MethodData对象，该对象保存了Profile统计的方法性能的数据
+printstatics 可以用于获取Hotspot 定义的C++类的静态属性，如表示Java堆内存的Universe对象
+printas 后跟一个Hotspot Type和地址，会打印该Type对象的各属性，效果同inspect命令，不过不局限与oop，也可以是对象的真实地址。
+findpc address 检查pc的状态，pc的值可以从线程的信息中拿到
+assert false\true hotspot开启或者关闭断言
+whatis  地址，返回一个地址存放的类型，几乎任何类型都可以，包括指针、对象、Klass对象、Method、ConstantPool、Field等的地址
 
-ConstantPool/ConstantPoolCache 对象：每个 InstanceKlass 关联着一个 ConstantPool，作为该类型的运行时常量池。这个常量池的结构跟 Class 文件里的常量池基本上是对应的
+
+
+1、类继承时，扫描堆区用基类一样能把子类都扫描出来。
+2、Class文件中有个静态常量池，加载成功后，静态常量池中的符号引用转化为直接引用并对接运行时常量池的过程称为解析。当符号引用首次被访问时才去解析（Hotspot，不同JVM有不同实现）。
+3、jdb命令也可以进行debug，和idea用的是同一套Java API
+4、
 
 
 public class StringTest {

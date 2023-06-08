@@ -35,4 +35,7 @@ XX:CMSWaitDuration=5000 后台background扫描线程扫描时间间隔，其实�
 -XX:+CMSParallelInitialMarkEnabled 开启第一步gc root的并行标记，很重要，因为这一步是stw
 -XX:+CMSScavengeBeforeRemark
 在CMS GC前启动一次ygc，目的在于减少old gen对ygc gen的引用，降低remark时的开销-----一般CMS的GC耗时 80%都在remark阶段
+24343434343
+2434234234
+243434
 
